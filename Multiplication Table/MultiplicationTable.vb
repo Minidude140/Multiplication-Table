@@ -51,21 +51,27 @@ Module MultiplicationTable
     Sub CreateTable(tableSize As Integer)
         Console.WriteLine(tableSize & vbLf)
         Dim multiplicationTable((tableSize - 1), (tableSize - 1)) As Integer
+        Dim currentValue As String
 
         'Populate multiplicationTable() array
         For row = multiplicationTable.GetLowerBound(0) To multiplicationTable.GetUpperBound(0)
-            For collumn = multiplicationTable.GetLowerBound(1) To multiplicationTable.GetUpperBound(1)
-                multiplicationTable(row, collumn) = (collumn + 1)
+            For column = multiplicationTable.GetLowerBound(1) To multiplicationTable.GetUpperBound(1)
+                multiplicationTable(row, column) = (column + 1) * (row + 1)
             Next
-
         Next
         'Write array contents to the console
+        'duplicate tableSize * 6 for each pad space and the two character of " |"
+        Console.WriteLine(StrDup((tableSize * 6), "-"))
         For row = multiplicationTable.GetLowerBound(0) To multiplicationTable.GetUpperBound(0)
-            For collumn = multiplicationTable.GetLowerBound(1) To multiplicationTable.GetUpperBound(1)
-                Console.Write(multiplicationTable(row, collumn))
+            Console.Write("|")
+            For column = multiplicationTable.GetLowerBound(1) To multiplicationTable.GetUpperBound(1)
+                currentValue = CStr(multiplicationTable(row, column))
+                Console.Write(currentValue.PadLeft(4) & " |")
             Next
             Console.WriteLine()
         Next
+        'duplicate tableSize * 6 for each pad space and the two character of " |"
+        Console.WriteLine(StrDup((tableSize * 6), "-"))
 
     End Sub
 
