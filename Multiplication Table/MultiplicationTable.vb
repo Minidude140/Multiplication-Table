@@ -12,9 +12,10 @@ Option Strict On
 '[~]Ask user for size of multiplication table
 '[~]Try-Catch input for integer
 '[~]Main loop and quit functionality
-'[]Create Array at desired size
-'[]Populate Array with multiplied data
-'[]Write to the console the table with proper formated rows and columns
+'[~]Create Array at desired size
+'[~]Populate Array with multiplied data
+'[~]Write to the console the table with proper formated rows and columns
+'[~]Add clear console option
 Module MultiplicationTable
     Dim exitFlag As Boolean = False
     Dim userInput As String
@@ -22,7 +23,7 @@ Module MultiplicationTable
 
     Sub Main()
         Do While exitFlag = False
-            Console.WriteLine("Enter the size of multiplication table desired" & vbLf & "(Enter a whole number or press 'Q' to quit)")
+            Console.WriteLine("Enter the size of multiplication table desired" & vbLf & "(Enter a whole number, 'C' to clear, or 'Q' to quit)")
             userInput = Console.ReadLine()
             Console.WriteLine()
             Try
@@ -37,12 +38,14 @@ Module MultiplicationTable
                     Console.WriteLine()
                 End If
             Catch ex As Exception
+                'Quit if 'Q' or clear console if 'C'
                 If userInput = "Q" Or userInput = "q" Then
-                    'Quit if 'Q' or 'q'
                     exitFlag = True
+                ElseIf userInput = "C" Or userInput = "c" Then
+                    Console.Clear()
+                    'any input that doesn't convert or not quit and clear
                 Else
-                    'any input that doesn't convert or not q
-                    Console.WriteLine("Please enter a whole number or 'Q' to quit." & vbLf)
+                    Console.WriteLine("Please enter a whole number, 'C' to clear, or 'Q' to quit" & vbLf)
                 End If
             End Try
         Loop
