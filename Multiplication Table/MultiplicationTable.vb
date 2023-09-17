@@ -22,12 +22,20 @@ Module MultiplicationTable
 
     Sub Main()
         Do While exitFlag = False
-            Console.WriteLine("Enter the size of multiplication table desired" & vbLf & "(PLease enter a whole number or press 'Q' to quit)")
+            Console.WriteLine("Enter the size of multiplication table desired" & vbLf & "(Enter a whole number or press 'Q' to quit)")
             userInput = Console.ReadLine()
+            Console.WriteLine()
             Try
                 tableSize = CInt(userInput)
-                'CreateTable() should go here
-                Console.WriteLine(tableSize & vbLf)
+                'Limits tableSize to Max of 12x12 and a Min of 1x1
+                If tableSize > 12 Then
+                    Console.WriteLine("I'm sorry that is too big to calculate right now. Try a 12x12 table." & vbLf)
+                ElseIf tableSize < 1 Then
+                    Console.WriteLine("I'm sorry that is too small!  Try at least a 1x1 table." & vbLf)
+                Else
+                    CreateTable(tableSize)
+                    Console.WriteLine()
+                End If
             Catch ex As Exception
                 If userInput = "Q" Or userInput = "q" Then
                     'Quit if 'Q' or 'q'
@@ -40,6 +48,26 @@ Module MultiplicationTable
         Loop
     End Sub
 
+    Sub CreateTable(tableSize As Integer)
+        Console.WriteLine(tableSize & vbLf)
+        Dim multiplicationTable((tableSize - 1), (tableSize - 1)) As Integer
+
+        'Populate multiplicationTable() array
+        For row = multiplicationTable.GetLowerBound(0) To multiplicationTable.GetUpperBound(0)
+            For collumn = multiplicationTable.GetLowerBound(1) To multiplicationTable.GetUpperBound(1)
+                multiplicationTable(row, collumn) = (collumn + 1)
+            Next
+
+        Next
+        'Write array contents to the console
+        For row = multiplicationTable.GetLowerBound(0) To multiplicationTable.GetUpperBound(0)
+            For collumn = multiplicationTable.GetLowerBound(1) To multiplicationTable.GetUpperBound(1)
+                Console.Write(multiplicationTable(row, collumn))
+            Next
+            Console.WriteLine()
+        Next
+
+    End Sub
 
 
 End Module
