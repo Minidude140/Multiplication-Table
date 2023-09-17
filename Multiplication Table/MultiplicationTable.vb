@@ -61,6 +61,7 @@ Module MultiplicationTable
         Next
         'Write array contents to the console
         'duplicate tableSize * 6 for each pad space and the two character of " |"
+        Console.WriteLine($"Enjoy your {tableSize} x {tableSize} multiplication table.")
         Console.WriteLine(StrDup((tableSize * 6), "-"))
         For row = multiplicationTable.GetLowerBound(0) To multiplicationTable.GetUpperBound(0)
             Console.Write("|")
